@@ -1,0 +1,5 @@
+@extends('user.layout')
+@section('title','Detail Pesanan — Garden Dreams')
+@section('content')
+<section class="section compact"><a class="back" href="/pesanan">← Kembali</a><div class="order-detail-head"><div><span class="eyebrow">ORDER DETAIL</span><h1>#GD-{{str_pad($pesanan->id,5,'0',STR_PAD_LEFT)}}</h1><p>{{$pesanan->tanggal->format('d M Y H:i')}}</p></div><span class="status {{$pesanan->status}}">{{$pesanan->status}}</span></div><div class="detail-grid"><div class="form-card"><h2>Produk</h2>@foreach($pesanan->detailTransaksi as $d)<div class="summary-line"><span>{{$d->produk->nama_produk}} × {{$d->jumlah}}</span><b>Rp {{number_format($d->subtotal,0,',','.')}}</b></div>@endforeach</div><div class="form-card"><h2>Pengiriman</h2><p><b>{{$pesanan->nama_penerima}}</b><br>{{$pesanan->no_hp}}<br>{{$pesanan->alamat}}</p><p>{{$pesanan->metode_pengiriman}} · Resi: {{$pesanan->nomor_resi??'Belum tersedia'}}</p><hr><h3>Total Rp {{number_format($pesanan->total,0,',','.')}}</h3>@if($pesanan->status==='Selesai')<a class="btn btn-light" href="/pesanan/{{$pesanan->id}}/pengembalian">Ajukan Pengembalian</a>@endif</div></div></section>
+@endsection

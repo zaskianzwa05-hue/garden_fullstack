@@ -1,0 +1,5 @@
+@extends('user.layout')
+@section('title','Akun — Garden Dreams')
+@section('content')
+<section class="section compact"><div class="page-heading"><span class="eyebrow">MY ACCOUNT</span><h1>Pengaturan Akun</h1></div><div class="account-grid"><div class="form-card"><h2>Profil</h2><form action="/akun" method="POST">@csrf<label>Nama<input name="nama" value="{{$user->nama}}" required></label><label>Email<input name="email" value="{{$user->email}}" required></label><label>No. HP<input name="no_hp" value="{{$user->no_hp}}"></label><button class="btn">Simpan Profil</button></form></div><div class="form-card"><h2>Ganti Password</h2><form action="/akun/password" method="POST">@csrf<label>Password Lama<input type="password" name="password_lama" required></label><label>Password Baru<input type="password" name="password" required></label><label>Konfirmasi<input type="password" name="password_confirmation" required></label><button class="btn btn-light">Ganti Password</button></form></div></div></section>
+@endsection

@@ -1,0 +1,5 @@
+@extends('admin.layout')
+@section('heading','Manajemen Pesanan')
+@section('content')
+<section class="panel"><form class="search"><select name="status"><option value="">Semua status</option>@foreach(['Menunggu','Diproses','Dikirim','Selesai','Dibatalkan'] as $s)<option @selected(request('status')===$s)>{{$s}}</option>@endforeach</select><button>Filter</button></form><table><tr><th>ID</th><th>Pelanggan</th><th>Total</th><th>Status</th><th>Resi</th><th>Aksi</th></tr>@foreach($pesanan as $p)<tr><td>#GD-{{$p->id}}</td><td>{{$p->user->nama}}</td><td>Rp {{number_format($p->total,0,',','.')}}</td><td>{{$p->status}}</td><td>{{$p->nomor_resi??'-'}}</td><td><form method="POST" action="/admin/pesanan/{{$p->id}}" class="inline-edit">@csrf @method('PUT')<select name="status">@foreach(['Menunggu','Diproses','Dikirim','Selesai','Dibatalkan'] as $s)<option @selected($p->status===$s)>{{$s}}</option>@endforeach</select><input name="nomor_resi" value="{{$p->nomor_resi}}" placeholder="No. resi"><button>Simpan</button></form></td></tr>@endforeach</table>{{$pesanan->links()}}</section>
+@endsection
